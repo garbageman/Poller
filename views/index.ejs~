@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Poller - Real-Time Crowdsourcing Polling Platform</title>
+		<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        	<link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
+		<link href = "stylesheets/css/bootstrap.css" rel = "stylesheet"> <!--change back to bootstrap.min-->
+        	<script src = "http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src = "javascripts/js/bootstrap.js"></script>
+	        <script src = "javascripts/highcharts.js"></script>
+        
+        <meta charset="utf-8">
+        <style>
+            #map-canvas1 {
+                margin: 0;
+                padding: 0;
+                width: 500px;
+                height: 300px;
+            }
+            #map-canvas2 {
+                margin: 0;
+                padding: 0;
+                width: 500px;
+                height: 300px;
+            }
+        </style>
+        <script src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script>
+            var map1, map2;
+            function initialize1() {
+                var mapOptions = {
+                    zoom: 3,
+                    center: new google.maps.LatLng(39.0997, -94.5786),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map1 = new google.maps.Map(document.getElementById('map-canvas1'), mapOptions);
+            }
+            google.maps.event.addDomListener(window, 'load', initialize1);
+            function initialize2() {
+                var mapOptions = {
+                    zoom: 3,
+                    center: new google.maps.LatLng(39.0997, -94.5786),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map2 = new google.maps.Map(document.getElementById('map-canvas2'), mapOptions);
+            }
+            google.maps.event.addDomListener(window, 'load', initialize2);
+        </script>
+        <!-- highcharts script will be included separate from html file obviously -->
+        <script type="text/javascript">
+        $(function () {
+            $('#dem-chart1').highcharts({
+                chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Demographics Breakdown - D. Chipotle'
+            },
+            xAxis: {
+                categories: ['Gender', 'Age', 'Education', 'Income Level', 'Country']
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total voting population'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+                series: [{
+                name: 'Unidentified',
+                data: [{y: 11, color: '#D3D3D3'}]
+            }, {
+                name: 'Male',
+                data: [{y: 81, color: '#00BFFF'}]
+            }, {
+                name: 'Female',
+                data: [{y: 48, color: '#FF69B4'}]
+            }, {
+                name: 'Unidentified',
+                data: [null, {y: 36, color: '#D3D3D3'}]
+            }, {
+                name: '40+',
+                data: [null, {y: 0, color: '#2252FF'}]
+            }, {
+                name: '35-39',
+                data: [null, {y: 1, color: '#446DFF'}]
+            }, {
+                name: '30-34',
+                data: [null, {y: 2, color: '#5F82FF'}]
+            }, {
+                name: '26-29',
+                data: [null, {y: 4, color: '#90A8FF'}]
+            }, {
+                name: '22-25',
+                data: [null, {y: 5, color: '#7CC4FF'}]
+            }, {
+                name: '19-21',
+                data: [null, {y: 50, color: '#67D9FF'}]
+            }, {
+                name: '15-18',
+                data: [null, {y: 31, color: '#00F3FF'}]
+            }, {
+                name: '12-14',
+                data: [null, {y: 11, color: '#00FF9E'}]
+            }, {
+                name: 'Unidentified',
+                data: [null, null, {y: 4, color: '#D3D3D3'}]
+            }, {
+                name: 'Postgraduate/Doctorate',
+                data: [null, null, {y: 0, color: '#FFFF00'}]
+            }, {
+                name: 'Master\'s Degree',
+                data: [null, null, {y: 1, color: '#DDA0DD'}]
+            }, {
+                name: 'Bachelor Degree (4 years college)',
+                data: [null, null, {y: 25, color: '#FFA500'}]
+            }, {
+                name: 'Associate\'s Degree (2 years college)',
+                data: [null, null, {y: 33, color: '#B22222'}]
+            }, {
+                name: 'High School (year 9-12)',
+                data: [null, null, {y: 66, color: '#20B2AA'}]
+            }, {
+                name: 'Middle School (year 6-8)',
+                data: [null, null, {y: 11, color: '#00FF00'}]
+            }, {
+                name: 'Unidentified',
+                data: [null, null, null, {y: 74, color: '#D3D3D3'}]
+            }, {
+                name: 'Upper Class (+$150k annual, top 5%)',
+                data: [null, null, null, {y: 1, color: '#FF1493'}]
+            }, {
+                name: 'Upper Middle Class Tier 2 (+$100k annual, top 33%)',
+                data: [null, null, null, {y: 11, color: '#D87093'}]
+            }, {
+                name: 'Upper Middle Class Tier 1 ($60,000-$100,000 annual)',
+                data: [null, null, null, {y: 41, color: '#008080'}]
+            }, {
+                name: '"Middle" Middle Class ($32,500-$60,000 annual)',
+                data: [null, null, null, {y: 11, color: '#2E8B57'}]
+            }, {
+                name: 'Lower Middle Class ($23,050-$32,500 annual)',
+                data: [null, null, null, {y: 2, color: '#8B4513'}]
+            }, {
+                name: 'Canada',
+                data: [null, null, null, null, {y: 11, color: '#CD853F'}]
+            }, {
+                name: 'United Kingdom',
+                data: [null, null, null, null, {y: 2, color: '#4169E1'}]
+            }, {
+                name: 'China',
+                data: [null, null, null, null, {y: 1, color: '#FF0000'}]
+            }, {
+                name: 'United States',
+                data: [null, null, null, null, {y: 126, color: '#1E90FF'}]
+            }]
+            });
+        });
+        $(function () {
+            $('#dem-chart2').highcharts({
+                chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Demographics Breakdown - C. Draw'
+            }, 
+            xAxis: {
+                categories: ['Gender', 'Age', 'Education', 'Income Level', 'Country']
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total voting population'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.data.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+                series: [{
+                name: 'Unidentified',
+                data: [{y: 21, color: '#D3D3D3'}]
+            }, {
+                name: 'Male',
+                data: [{y: 342, color: '#00BFFF'}]
+            }, {
+                name: 'Female',
+                data: [{y: 79, color: '#FF69B4'}]
+            }, {
+                name: 'Unidentified',
+                data: [null, {y: 36, color: '#D3D3D3'}]
+            }, {
+                name: '40+',
+                data: [null, {y: 0, color: '#2252FF'}]
+            }, {
+                name: '35-39',
+                data: [null, {y: 42, color: '#446DFF'}]
+            }, {
+                name: '30-34',
+                data: [null, {y: 55, color: '#5F82FF'}]
+            }, {
+                name: '26-29',
+                data: [null, {y: 70, color: '#90A8FF'}]
+            }, {
+                name: '22-25',
+                data: [null, {y: 70, color: '#7CC4FF'}]
+            }, {
+                name: '19-21',
+                data: [null, {y: 88, color: '#67D9FF'}]
+            }, {
+                name: '15-18',
+                data: [null, {y: 57, color: '#00F3FF'}]
+            }, {
+                name: '12-14',
+                data: [null, {y: 24, color: '#00FF9E'}]
+            }, {
+                name: 'Unidentified',
+                data: [null, null, {y: 4, color: '#D3D3D3'}]
+            }, {
+                name: 'Postgraduate/Doctorate',
+                data: [null, null, {y: 0, color: '#FFFF00'}]
+            }, {
+                name: 'Master\'s Degree',
+                data: [null, null, {y: 1, color: '#DDA0DD'}]
+            }, {
+                name: 'Bachelor Degree (4 years college)',
+                data: [null, null, {y: 25, color: '#FFA500'}]
+            }, {
+                name: 'Associate\'s Degree (2 years college)',
+                data: [null, null, {y: 33, color: '#B22222'}]
+            }, {
+                name: 'High School (year 9-12)',
+                data: [null, null, {y: 66, color: '#20B2AA'}]
+            }, {
+                name: 'Middle School (year 6-8)',
+                data: [null, null, {y: 11, color: '#00FF00'}]
+            }, {
+                name: 'Unidentified',
+                data: [null, null, null, {y: 74, color: '#D3D3D3'}]
+            }, {
+                name: 'Upper Class (+$150k annual, top 5%)',
+                data: [null, null, null, {y: 1, color: '#FF1493'}]
+            }, {
+                name: 'Upper Middle Class Tier 2 (+$100k annual, top 33%)',
+                data: [null, null, null, {y: 11, color: '#D87093'}]
+            }, {
+                name: 'Upper Middle Class Tier 1 ($60,000-$100,000 annual)',
+                data: [null, null, null, {y: 41, color: '#008080'}]
+            }, {
+                name: '"Middle" Middle Class ($32,500-$60,000 annual)',
+                data: [null, null, null, {y: 11, color: '#2E8B57'}]
+            }, {
+                name: 'Lower Middle Class ($23,050-$32,500 annual)',
+                data: [null, null, null, {y: 2, color: '#8B4513'}]
+            }, {
+                name: 'Canada',
+                data: [null, null, null, null, {y: 42, color: '#CD853F'}]
+            }, {
+                name: 'United Kingdom',
+                data: [null, null, null, null, {y: 10, color: '#4169E1'}]
+            }, {
+                name: 'Spain',
+                data: [null, null, null, null, {y: 3, color: '#FF0000'}]
+            }, {
+                name: 'United States',
+                data: [null, null, null, null, {y: 387, color: '#1E90FF'}]
+            }]
+            });
+        });
+		</script>
+        
+	</head>
+	
+	<body>
+        
+		<div class = "navbar navbar-default navbar-static-top" role = "navigation">
+			<div class = "container">
+				<div class="navbar-inner">
+				<a href = "poller.htm" class = "navbar-brand"><img src="images/rsz_poller_logo_temp.png" style="margin-top: -12px; margin-bottom: -15px" align="left"></img></a>
+                </div>
+				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+					<span class = "icon-bar"></span> <span class = "icon-bar"></span> <span class = "icon-bar"></span>
+				</button>
+				
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+					<ul class = "nav nav-tabs navbar-nav navbar-left">
+						
+						<li class = "active"><a>Hot</a></li>
+						<li><a href = "#">New</a></li>
+						<li><a href = "#">Top</a></li>
+						
+						<li><a href = "/about">About</a></li>
+						
+					</ul>
+                    
+                    <ul class = "nav navbar-nav">
+				        <p class="navbar-text"><b>Main Community</b></p>
+					</ul>
+                    
+                    <ul class = "nav navbar-nav">
+				        <a href="ask.htm"><button type="button" class="btn btn-danger navbar-btn">Ask!</button></a>
+					</ul>
+                    
+					<div class = "col-sm-3 col-md-2 navbar-right">
+						<form class="navbar-form navbar-right" role = "search" name = "srch-term" id = "srch-term">
+							<div class = "input-group">
+								<input type = "text" class = "form-control" placeholder = "Search">
+									<div class="input-group-btn">
+										<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+									</div>
+							</div>
+						</form>
+					</div>
+                    
+					<ul class = "nav navbar-nav navbar-right">
+				        <a href="/login"><button type="button" class="btn btn-default navbar-btn">Login</button></a>
+					</ul>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- Body -->
+        
+		<div class = "container">
+            
+            <div>
+                <div class = "span6" style = "display: inline-block; float: left">
+                    <div style = "text-align: center"><a href="#"><img src = "images/glyphicons_free/glyphicons/png/glyphicons_213_up_arrow.png"></img></a></div>
+                    <div style = "text-align: center"><h4>&nbsp;543&nbsp;</h4></div>
+                    <div style = "text-align: center"><a href="#"><img src = "images/glyphicons_free/glyphicons/png/glyphicons_212_down_arrow.png"></img></a></div>
+                </div>
+                <div>
+                    <h4 class = "list-group-item-heading">&nbsp;<b>Q:</b> What is your favorite fast food? <button type="button" class="btn btn-success pull-right">Answer</button></h4>
+                    <h4>&nbsp;<i class="glyphicon glyphicon-arrow-right" style = "color: #00BFFF"></i> <button type="button" class="btn"><b>A.</b> McDonald's</button> <button type="button" class="btn"><b>B.</b> Wendy's</button> <button type="button" class="btn"><b>C.</b> Burger King</button> <button type="button" class="btn"><b>D.</b> Chipotle</button> </h4>
+                </div>
+            </div>
+            
+            <div class = "progress row-fluid">
+                <div class="progress-bar progress-bar-success" style="width: 35%">
+                    <span>35%</span>
+                </div>
+                <div class="progress-bar progress-bar-warning" style="width: 20%">
+                    <span>20%</span>
+                </div>
+                <div class="progress-bar progress-bar-danger" style="width: 10%">
+                    <span>10%</span>
+                </div>
+                <div class="progress-bar progress-bar-active" style="width: 35%">
+                    <span>35%</span>
+                </div>
+            </div>
+            
+            <div id = "map-canvas1" style = "float: right"></div>
+            <div class = "container">
+                <div id = "dem-chart1" style="min-width: 620px; height: 300px; margin: 5; float: left"></div>
+            </div>
+            
+            <a href = "#">153 comments</a> - <a href = "#">share</a> - asked by <a href = "#">BobSagat62</a> 7 hours ago  <br></br>    
+            
+            <div>
+                <div class = "span6" style = "display: inline-block; float: left">
+                    <div style = "text-align: center"><a href="#"><img src = "images/glyphicons_free/glyphicons/png/glyphicons_213_up_arrow.png"></img></a></div>
+                    <div style = "text-align: center"><h4>&nbsp;499&nbsp;</h4></div>
+                    <div style = "text-align: center"><a href="#"><img src = "images/glyphicons_free/glyphicons/png/glyphicons_212_down_arrow.png"></img></a></div>
+                </div>
+                <div>
+                    <h4 class = "list-group-item-heading">&nbsp;<b>Q:</b> Who will win the Thursday match between the United States and Germany? <button type="button" class="btn btn-success pull-right">Answer</button></h4>
+                    <h4>&nbsp;<i class="glyphicon glyphicon-arrow-right" style = "color: #00BFFF"></i>  <button type="button" class="btn"><b>A.</b> United States</button> <button type="button" class="btn"><b>B.</b> Germany</button> <button type="button" class="btn"><b>C.</b> Draw</button> </h4>
+                </div>
+            </div>
+            
+            <div class = "progress row-fluid">
+                <div class="progress-bar progress-bar-default" style="width: 31%">
+                    <span>31%</span>
+                </div>
+                <div class="progress-bar progress-bar-danger" style="width: 29%">
+                    <span>29%</span>
+                </div>
+                <div class="progress-bar progress-bar-success" style="width: 40%">
+                    <span>40%</span>
+                </div>
+            </div>
+            
+            <div id = "map-canvas2" style = "float: right"></div>
+            <div class = "container">
+                <div id = "dem-chart2" style="min-width: 620px; height: 300px; margin: 5; float: left"></div>
+            </div>
+            
+            <a href = "#">211 comments</a> - <a href = "#">share</a> - asked by <a href = "#">ronaldofutbol11</a> 7 hours ago <br></br>
+
+        </div>
+        
+        <div class = "container">
+            <ul class = "pagination">
+                <li class = "disabled"><a>&laquo;</a></li>
+                <li class = "active"><a>1 <span class="sr-only">(current)</span></a></li>
+                <li><a href = "#">2</a></li>
+                <li><a href = "#">3</a></li>
+                <li><a href = "#">&raquo;</a></li>
+            </ul>
+        </div>
+
+        <div class = "navbar navbar-default navbar-static-bottom">
+            <div class = "container">
+                <p class = "navbar-text">Poller</p>
+            </div>
+        </div>
+		
+	</body>
+
+</html>
